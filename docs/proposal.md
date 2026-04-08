@@ -10,7 +10,8 @@
 
 - **Role:** Junior Data Analyst
 - **Company:** EPCVIP, Inc
-- **Link:** https://www.indeed.com/viewjob?jk=d71c3b7f5db99929
+- **Job Posting (Indeed):** https://www.indeed.com/viewjob?jk=d71c3b7f5db99929
+- **Job Posting (PDF):** https://github.com/eokome/data-analyst-fintech/blob/main/docs/job_posting.pdf
 
 **SQL requirement (quote the posting):** "Google Analytics, SQL, or data visualization certifications are a plus."
 
