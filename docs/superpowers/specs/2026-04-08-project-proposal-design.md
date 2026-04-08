@@ -16,7 +16,7 @@ End-to-end marketing analytics pipeline targeting a Junior Data Analyst role in 
 
 ## Project Framing
 
-**Financial Services Lead Gen Analytics** — a pipeline that ingests consumer complaint data from the Consumer Financial Protection Bureau's public REST API, transforms it through Snowflake using dbt, and surfaces campaign targeting insights via a deployed Streamlit dashboard.
+**Financial Services Lead Gen Analytics** — a pipeline that ingests consumer complaint data from the Consumer Financial Protection Bureau's public REST API, transforms it through Snowflake using dbt (a tool that uses SQL to clean and organize raw data into analysis-ready tables), and surfaces campaign targeting insights via a deployed Streamlit dashboard.
 
 ### Why This Works
 
@@ -60,7 +60,7 @@ This project speaks directly to:
 | Layer | Tool |
 |---|---|
 | Data Warehouse | Snowflake |
-| Transformation | dbt |
+| Transformation | dbt (data build tool) — writes SQL to clean raw data and build analysis-ready tables in Snowflake, organized in the right order and tested for accuracy |
 | Orchestration | GitHub Actions |
 | Dashboard | Streamlit (deployed) |
 | Knowledge Base | Claude Code |
