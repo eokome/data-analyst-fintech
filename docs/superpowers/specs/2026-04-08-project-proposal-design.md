@@ -20,12 +20,12 @@ End-to-end marketing analytics pipeline targeting a Junior Data Analyst role in 
 
 ### Why This Works
 
-The CFPB complaint database reveals which financial products and geographies have the highest consumer dissatisfaction — exactly the demand signal a lead gen analyst uses to identify where consumers are actively seeking alternatives and where campaigns should be focused.
+The Consumer Financial Protection Bureau complaint database reveals which financial products and geographies have the highest consumer dissatisfaction — exactly the demand signal a lead gen analyst uses to identify where consumers are actively seeking alternatives and where campaigns should be focused.
 
 ## Data Sources
 
-- **API (Source 1):** Consumer Financial Protection Bureau (CFPB) Complaint Database REST API — free, public, no auth required, scheduled via GitHub Actions
-- **Web Scrape (Source 2):** Financial services marketing content — company websites, fintech blogs, industry reports, CFPB consumer education pages
+- **API (Source 1):** Consumer Financial Protection Bureau Complaint Database REST API — free, public, no auth required, scheduled via GitHub Actions
+- **Web Scrape (Source 2):** Financial services marketing content — company websites, fintech blogs, industry reports, Consumer Financial Protection Bureau consumer education pages
 
 ## Star Schema Design
 
@@ -45,7 +45,7 @@ The CFPB complaint database reveals which financial products and geographies hav
 
 Scraped sources from 3+ sites covering:
 - EPCVIP and financial services lead gen industry context
-- CFPB consumer education and regulatory content
+- Consumer Financial Protection Bureau consumer education and regulatory content
 - Fintech marketing industry publications
 
 ## Transferability
