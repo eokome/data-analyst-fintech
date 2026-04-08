@@ -205,3 +205,24 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# project requirements
+project_requirements_README.md
+proposal-template.md
+
+# macOS
+.DS_Store
+
+# Claude Code local settings
+.claude/
+
+# dbt credentials (contains Snowflake username/password)
+profiles.yml
+
+# Secrets and credentials
+secrets.yml
+secrets.yaml
+*.key
+*.pem
+credentials.json
+
