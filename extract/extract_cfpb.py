@@ -16,7 +16,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
 
-CFPB_URL     = "https://api.consumerfinance.gov/data/complaints"
+CFPB_URL     = "https://www.consumerfinance.gov/data-research/consumer-complaints/search/api/v1/"
 PAGE_SIZE    = 5000
 INITIAL_DATE = date(2020, 1, 1)
 FLUSH_AT     = 80_000  # rows to accumulate before writing to Snowflake
@@ -36,7 +36,7 @@ _FIELD_MAP = {
     "SUB_PRODUCT":                  "sub_product",
     "ISSUE":                        "issue",
     "SUB_ISSUE":                    "sub_issue",
-    "CONSUMER_COMPLAINT_NARRATIVE": "consumer_complaint_narrative",
+    "CONSUMER_COMPLAINT_NARRATIVE": "complaint_what_happened",
     "COMPANY_PUBLIC_RESPONSE":      "company_public_response",
     "COMPANY":                      "company",
     "STATE":                        "state",
@@ -45,8 +45,8 @@ _FIELD_MAP = {
     "CONSUMER_CONSENT_PROVIDED":    "consumer_consent_provided",
     "SUBMITTED_VIA":                "submitted_via",
     "DATE_SENT_TO_COMPANY":         "date_sent_to_company",
-    "COMPANY_RESPONSE_TO_CONSUMER": "company_response_to_consumer",
-    "TIMELY_RESPONSE":              "timely_response",
+    "COMPANY_RESPONSE_TO_CONSUMER": "company_response",
+    "TIMELY_RESPONSE":              "timely",
     "CONSUMER_DISPUTED":            "consumer_disputed",
 }
 

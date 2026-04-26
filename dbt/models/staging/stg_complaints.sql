@@ -4,7 +4,7 @@ WITH source AS (
 
 SELECT
     TRY_CAST(complaint_id AS INT)                                          AS complaint_id,
-    TRY_CAST(date_received AS DATE)                                        AS date_received,
+    TRY_TO_DATE(LEFT(date_received, 10))                                   AS date_received,
     product,
     sub_product,
     issue,
