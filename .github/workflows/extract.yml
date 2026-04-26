@@ -35,7 +35,7 @@ jobs:
         run: python extract/extract_cfpb.py
 
       - name: Install dbt
-        run: pip install dbt-snowflake
+        run: pip install dbt-snowflake==1.9.2
 
       - name: Create dbt profiles
         run: |

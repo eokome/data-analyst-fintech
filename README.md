@@ -112,7 +112,7 @@ Add the following secrets in **GitHub → Settings → Secrets and variables →
 
 | Secret | Value |
 |---|---|
-| `SNOWFLAKE_ACCOUNT` | `VXBOMAL-QGC80885` |
+| `SNOWFLAKE_ACCOUNT` | your Snowflake account identifier |
 | `SNOWFLAKE_USER` | your Snowflake username |
 | `SNOWFLAKE_PASSWORD` | your Snowflake password |
 | `SNOWFLAKE_WAREHOUSE` | `COMPUTE_WH` |
