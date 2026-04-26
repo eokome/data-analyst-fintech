@@ -1,0 +1,86 @@
+version: 2
+
+models:
+  - name: fct_complaints
+    description: "Fact table — one row per CFPB complaint, grain: complaint_id"
+    columns:
+      - name: complaint_id
+        description: "CFPB complaint ID (natural key)"
+        tests:
+          - not_null
+          - unique
+      - name: date_key
+        description: "FK to dim_date.date_key (YYYYMMDD int)"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_key
+      - name: product_key
+        description: "FK to dim_product.product_key"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: product_key
+      - name: company_key
+        description: "FK to dim_company.company_key"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_company')
+              field: company_key
+      - name: state_key
+        description: "FK to dim_geography.state_key"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_geography')
+              field: state_key
+      - name: issue_key
+        description: "FK to dim_issue.issue_key"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_issue')
+              field: issue_key
+
+  - name: dim_date
+    description: "Calendar dimension: 2020-01-01 to today"
+    columns:
+      - name: date_key
+        tests: [not_null, unique]
+      - name: full_date
+        tests: [not_null]
+
+  - name: dim_product
+    description: "Financial product / sub-product dimension"
+    columns:
+      - name: product_key
+        tests: [not_null, unique]
+      - name: product
+        tests: [not_null]
+
+  - name: dim_company
+    description: "Company dimension"
+    columns:
+      - name: company_key
+        tests: [not_null, unique]
+      - name: company_name
+        tests: [not_null]
+
+  - name: dim_geography
+    description: "US state and territory geography dimension"
+    columns:
+      - name: state_key
+        tests: [not_null, unique]
+      - name: state_abbrev
+        tests: [not_null]
+
+  - name: dim_issue
+    description: "CFPB issue / sub-issue dimension"
+    columns:
+      - name: issue_key
+        tests: [not_null, unique]
+      - name: issue
+        tests: [not_null]
