@@ -216,6 +216,9 @@ proposal-template.md
 # Claude Code local settings
 .claude/
 
+# Git worktrees
+.worktrees/
+
 # dbt credentials (contains Snowflake username/password)
 profiles.yml
 
