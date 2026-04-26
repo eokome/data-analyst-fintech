@@ -5,6 +5,8 @@ from datetime import date, timedelta
 from typing import Iterator
 
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 import pandas as pd
 import snowflake.connector
 from snowflake.connector.pandas_tools import write_pandas
@@ -148,11 +150,14 @@ def main() -> None:
     cur = conn.cursor()
     cur.execute(
         f"DELETE FROM {DATABASE}.{SCHEMA}.{TABLE} "
-        f"WHERE DATE_RECEIVED >= '{load_start}' AND DATE_RECEIVED <= '{load_end}'"
+        "WHERE DATE_RECEIVED >= %s AND DATE_RECEIVED <= %s",
+        (str(load_start), str(load_end)),
     )
     cur.close()
 
     session = requests.Session()
+    _retry = Retry(total=3, backoff_factor=2, status_forcelist=[429, 500, 502, 503, 504])
+    session.mount("https://", HTTPAdapter(max_retries=_retry))
     batch: list[dict] = []
     current = load_start
 
