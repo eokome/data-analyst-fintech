@@ -2,7 +2,6 @@
 import os
 import logging
 from datetime import date, timedelta
-from typing import Iterator
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -17,7 +16,6 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 log = logging.getLogger(__name__)
 
 CFPB_URL     = "https://www.consumerfinance.gov/data-research/consumer-complaints/search/api/v1/"
-PAGE_SIZE    = 5000
 INITIAL_DATE = date(2020, 1, 1)
 FLUSH_AT     = 80_000  # rows to accumulate before writing to Snowflake
 
@@ -90,25 +88,17 @@ def hits_to_df(hits: list[dict]) -> pd.DataFrame:
 
 def _fetch_window(
     session: requests.Session, start: date, end: date
-) -> Iterator[list[dict]]:
-    frm = 0
-    while True:
-        params = {
-            "date_received_min": str(start),
-            "date_received_max": str(end),
-            "size":              PAGE_SIZE,
-            "frm":               frm,
-            "format":            "json",
-        }
-        resp = session.get(CFPB_URL, params=params, timeout=60)
-        resp.raise_for_status()
-        hits = resp.json()["hits"]["hits"]
-        if not hits:
-            break
-        yield [h["_source"] for h in hits]
-        if len(hits) < PAGE_SIZE:
-            break
-        frm += PAGE_SIZE
+) -> list[dict]:
+    # format=json returns all records for the window as a flat list (no pagination needed)
+    params = {
+        "date_received_min": str(start),
+        "date_received_max": str(end),
+        "format":            "json",
+    }
+    resp = session.get(CFPB_URL, params=params, timeout=120)
+    resp.raise_for_status()
+    records = resp.json()
+    return [r["_source"] for r in records] if records else []
 
 
 def _get_load_start(conn: snowflake.connector.SnowflakeConnection) -> date:
@@ -162,8 +152,7 @@ def main() -> None:
     current = load_start
 
     while current <= load_end:
-        for page in _fetch_window(session, current, current):
-            batch.extend(page)
+        batch.extend(_fetch_window(session, current, current))
         if len(batch) >= FLUSH_AT or current == load_end:
             if batch:
                 df = hits_to_df(batch)
