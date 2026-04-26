@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: raw
+    database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
+    schema: RAW
+    tables:
+      - name: complaints
+        description: "Raw CFPB consumer complaints loaded by extract_cfpb.py"
+        columns:
+          - name: COMPLAINT_ID
+            description: "CFPB complaint identifier"
+          - name: DATE_RECEIVED
+            description: "Date complaint was received by CFPB"
+          - name: PRODUCT
+            description: "Financial product type"
+          - name: COMPANY
+            description: "Company the complaint is against"
+          - name: STATE
+            description: "Consumer's state abbreviation"

@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: stg_complaints
+    description: "Cleaned and type-cast CFPB complaints from RAW.COMPLAINTS"
+    columns:
+      - name: complaint_id
+        description: "CFPB complaint ID cast to INT"
+        tests:
+          - not_null
+          - unique
+      - name: date_received
+        description: "Date complaint received, cast to DATE"
+        tests:
+          - not_null
+      - name: product
+        description: "Financial product type"
+        tests:
+          - not_null
+      - name: state
+        description: "Consumer's state abbreviation"
+        tests:
+          - accepted_values:
+              values: ['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI',
+                       'ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN',
+                       'MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH',
+                       'OK','OR','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA',
+                       'WA','WV','WI','WY','AA','AE','AP']
+              config:
+                severity: warn
+      - name: timely_response
+        description: "Whether company responded on time (BOOLEAN)"
+      - name: consumer_disputed
+        description: "Whether consumer disputed the response (BOOLEAN)"
+      - name: has_narrative
+        description: "Whether consumer wrote a complaint narrative"
