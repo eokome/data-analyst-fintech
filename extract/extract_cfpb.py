@@ -95,10 +95,20 @@ def _fetch_window(
         "date_received_max": str(end),
         "format":            "json",
     }
-    resp = session.get(CFPB_URL, params=params, timeout=120)
-    resp.raise_for_status()
-    records = resp.json()
-    return [r["_source"] for r in records] if records else []
+    for attempt in range(4):
+        try:
+            resp = session.get(CFPB_URL, params=params, timeout=120)
+            resp.raise_for_status()
+            records = resp.json()
+            return [r["_source"] for r in records] if records else []
+        except (requests.exceptions.ChunkedEncodingError,
+                requests.exceptions.ConnectionError) as e:
+            if attempt == 3:
+                raise
+            wait = 10 * (attempt + 1)
+            log.warning("Network error on %s (attempt %d/4), retrying in %ds: %s", start, attempt + 1, wait, e)
+            import time; time.sleep(wait)
+    return []
 
 
 def _get_load_start(conn: snowflake.connector.SnowflakeConnection) -> date:
