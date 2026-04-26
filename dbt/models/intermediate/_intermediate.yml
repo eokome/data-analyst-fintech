@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: int_complaints_enriched
+    description: "Staging complaints enriched with product_category bucket"
+    columns:
+      - name: complaint_id
+        tests:
+          - not_null
+          - unique
+      - name: product_category
+        description: "Bucketed product category: Lending, Cards, Banking, Debt, Other"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Lending', 'Cards', 'Banking', 'Debt', 'Other']
