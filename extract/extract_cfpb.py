@@ -117,7 +117,7 @@ def _get_load_start(conn: snowflake.connector.SnowflakeConnection) -> date:
         cur.execute(f"SELECT MAX(DATE_RECEIVED) FROM {DATABASE}.{SCHEMA}.{TABLE}")
         row = cur.fetchone()
         if row and row[0]:
-            return date.fromisoformat(str(row[0])) - timedelta(days=7)
+            return date.fromisoformat(str(row[0])[:10]) - timedelta(days=7)
         return INITIAL_DATE
     except Exception:
         return INITIAL_DATE

@@ -61,7 +61,7 @@ data-analyst-fintech/
 ## Milestones
 
 | Milestone | Due | Status |
-|---|---|---|
+|---|---|---|does 
 | Proposal | Apr 13 | In progress |
 | Milestone 01: Extract, Load & Transform | Apr 27 | Not started |
 | Milestone 02: Present & Polish | May 4 | Not started |

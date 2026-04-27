@@ -2,7 +2,7 @@
 
 **Date:** 2026-04-13
 **Project:** Financial Services Lead Gen Analytics
-**Milestone:** 01 — Extract, Load & Transform (due Apr 27)
+**Milestone:** 01 — Extract, Load & Transform
 
 ## Overview
 
