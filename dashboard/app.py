@@ -196,6 +196,7 @@ with tab2:
         ORDER BY timely_rate ASC
         LIMIT 20
     """)
+    timely_df["TIMELY_RATE"] = pd.to_numeric(timely_df["TIMELY_RATE"])
     fig_timely = px.bar(
         timely_df, x="TIMELY_RATE", y="COMPANY_NAME", orientation="h",
         title="Timely Response: Worst 20 Companies (≥10 complaints)",
