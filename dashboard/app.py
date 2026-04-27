@@ -184,25 +184,25 @@ with tab1:
 
 # ──────── Diagnostic ─────────────────────────────────────────────────────────
 with tab2:
-    # Consumer dispute rate by product category
-    dispute_df = run_query(f"""
+    # Complaint volume by company response type
+    response_df = run_query(f"""
         SELECT
-            dp.product_category,
-            ROUND(AVG(CASE WHEN f.consumer_disputed THEN 1.0 ELSE 0.0 END) * 100, 1) AS dispute_rate,
-            COUNT(*) AS complaint_count
+            f.company_response,
+            COUNT(*) AS complaint_count,
+            ROUND(AVG(CASE WHEN f.timely_response THEN 1.0 ELSE 0.0 END) * 100, 1) AS timely_rate
         {JOINS} {W}
-        GROUP BY dp.product_category
-        HAVING COUNT(*) >= 100
-        ORDER BY dispute_rate DESC
+        WHERE f.company_response IS NOT NULL
+        GROUP BY f.company_response
+        ORDER BY complaint_count DESC
+        LIMIT 10
     """)
-    dispute_df["DISPUTE_RATE"] = pd.to_numeric(dispute_df["DISPUTE_RATE"])
-    fig_dispute = px.bar(
-        dispute_df, x="DISPUTE_RATE", y="PRODUCT_CATEGORY", orientation="h",
-        title="Consumer Dispute Rate by Product Category",
-        labels={"DISPUTE_RATE": "Dispute Rate (%)", "PRODUCT_CATEGORY": "Product Category"},
+    fig_response = px.bar(
+        response_df, x="COMPLAINT_COUNT", y="COMPANY_RESPONSE", orientation="h",
+        title="Complaints by Company Response Type",
+        labels={"COMPLAINT_COUNT": "Complaints", "COMPANY_RESPONSE": "Company Response"},
     )
-    fig_dispute.update_layout(yaxis={"categoryorder": "total ascending"})
-    st.plotly_chart(fig_dispute, use_container_width=True)
+    fig_response.update_layout(yaxis={"categoryorder": "total ascending"})
+    st.plotly_chart(fig_response, use_container_width=True)
 
     # COVID vs Rate Hike period comparison
     period_df = run_query(f"""
