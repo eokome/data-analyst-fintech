@@ -209,6 +209,8 @@ __marimo__/
 # project requirements
 project_requirements_README.md
 proposal-template.md
+readme_template.md
+docs/readme-template.md
 
 # macOS
 .DS_Store
