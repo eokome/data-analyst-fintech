@@ -184,26 +184,25 @@ with tab1:
 
 # ──────── Diagnostic ─────────────────────────────────────────────────────────
 with tab2:
-    # Timely response rate — worst 20 companies (top offenders)
-    timely_df = run_query(f"""
+    # Consumer dispute rate by product category
+    dispute_df = run_query(f"""
         SELECT
-            dc.company_name,
-            ROUND(AVG(CASE WHEN f.timely_response THEN 1.0 ELSE 0.0 END) * 100, 1) AS timely_rate,
+            dp.product_category,
+            ROUND(AVG(CASE WHEN f.consumer_disputed THEN 1.0 ELSE 0.0 END) * 100, 1) AS dispute_rate,
             COUNT(*) AS complaint_count
         {JOINS} {W}
-        GROUP BY dc.company_name
-        HAVING COUNT(*) >= 10
-        ORDER BY timely_rate ASC
-        LIMIT 20
+        GROUP BY dp.product_category
+        HAVING COUNT(*) >= 100
+        ORDER BY dispute_rate DESC
     """)
-    timely_df["TIMELY_RATE"] = pd.to_numeric(timely_df["TIMELY_RATE"])
-    fig_timely = px.bar(
-        timely_df, x="TIMELY_RATE", y="COMPANY_NAME", orientation="h",
-        title="Timely Response: Worst 20 Companies (≥10 complaints)",
-        labels={"TIMELY_RATE": "Timely Response Rate (%)", "COMPANY_NAME": "Company"},
+    dispute_df["DISPUTE_RATE"] = pd.to_numeric(dispute_df["DISPUTE_RATE"])
+    fig_dispute = px.bar(
+        dispute_df, x="DISPUTE_RATE", y="PRODUCT_CATEGORY", orientation="h",
+        title="Consumer Dispute Rate by Product Category",
+        labels={"DISPUTE_RATE": "Dispute Rate (%)", "PRODUCT_CATEGORY": "Product Category"},
     )
-    fig_timely.update_layout(yaxis={"categoryorder": "total ascending"})
-    st.plotly_chart(fig_timely, use_container_width=True)
+    fig_dispute.update_layout(yaxis={"categoryorder": "total ascending"})
+    st.plotly_chart(fig_dispute, use_container_width=True)
 
     # COVID vs Rate Hike period comparison
     period_df = run_query(f"""
