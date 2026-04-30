@@ -95,6 +95,14 @@ erDiagram
     fct_complaints ||--|| dim_issue : "issue_key"
 ```
 
+## Dashboard Preview
+
+**Descriptive Analytics**
+![Descriptive Dashboard](docs/dashboard-descriptive.png)
+
+**Diagnostic Analytics**
+![Diagnostic Dashboard](docs/dashboard-diagnostic.png)
+
 ## Key Insights
 
 **Descriptive (what happened?):** Credit card complaints surged 67% in 2024 as average APRs hit a record 25.2%, while credit reporting errors dominated overall volume at 80%+ of all FY2023 complaints.
