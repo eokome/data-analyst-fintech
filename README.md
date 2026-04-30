@@ -28,7 +28,11 @@ This project demonstrates every skill the role requires: SQL-based data transfor
 ```mermaid
 flowchart LR
     A[CFPB Complaints API] -->|daily fetch| B[GitHub Actions]
+    W[Web Sources\n15 sites] -->|Firecrawl| B
     B -->|extract_cfpb.py| C[(Snowflake\nFINTECH_DB.RAW\nCOMPLAINTS)]
+    B -->|extract_firecrawl.py| C2[(Snowflake\nFINTECH_DB.RAW\nSCRAPED_CONTENT)]
+    B -->|extract_firecrawl.py| K[knowledge/raw/\n15 markdown files]
+    K -->|Claude Code| L[knowledge/wiki/\noverview · entities · themes]
     C -->|dbt staging| D[(FINTECH_DB.STAGING\nstg_complaints)]
     D -->|dbt intermediate| E[(FINTECH_DB.STAGING\nint_complaints_enriched)]
     E -->|dbt mart| F[(FINTECH_DB.MART\nfct_complaints + 5 dims)]
@@ -90,10 +94,6 @@ erDiagram
     fct_complaints ||--|| dim_geography : "state_key"
     fct_complaints ||--|| dim_issue : "issue_key"
 ```
-
-## Dashboard Preview
-
-*Screenshot coming in Milestone 02.*
 
 ## Key Insights
 
