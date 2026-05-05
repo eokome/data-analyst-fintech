@@ -131,6 +131,18 @@ Paradoxically, reduced CFPB enforcement may increase lead gen opportunity:
 
 ---
 
+## Theme 7: Student Loan Distress Is a Growing, Quantifiable Signal
+
+**What the data shows:**
+Interest rate increases on student loans are costing borrowers $3 billion+ annually (CFPB blog, January 2025). Complaint volume elevated since federal loan payments resumed post-pandemic pause, driven by servicer errors, repayment processing failures, and income-driven repayment plan delays.
+
+**Lead gen application for EPCVIP:**
+Borrowers under payment pressure are actively searching for refinancing options, income-driven repayment guidance, and loan consolidation products. Student loan complaint density by state maps to a receptive audience for these offers — particularly in states with high graduate student populations.
+
+*Source: cfpb-blog.md*
+
+---
+
 ## Synthesis: The Lead Gen Targeting Framework
 
 Combining all cross-source themes, the optimal framework for EPCVIP is:
@@ -147,7 +159,7 @@ THEN increase campaign_budget FOR alternative_products_in_category
 2. **Mortgages** (rate-driven, servicer failures, refinance window) — cyclical but high value
 3. **Debt collection** (structural, persistent, debt relief demand) — evergreen
 4. **Credit reporting** (dominant volume, credit repair market) — large audience
-5. **Student loans** (post-pause pressure, servicer errors) — growing
+5. **Student loans** (post-pause pressure, servicer errors, $3B+ annual borrower cost from rate increases) — growing
 
 **Data refresh cadence:**  
 CFPB database updates daily. Optimal pipeline: weekly extract → dbt transformation → Streamlit dashboard alert when complaint rate in a product/state combination exceeds a defined threshold.

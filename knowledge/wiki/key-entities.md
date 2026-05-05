@@ -99,6 +99,13 @@ States with high complaint rates per capita but underserved lead generation cove
 
 EPCVIP sits at the intersection of all entities above. As a financial lead generation company:
 
+**Company profile:**
+- **CEO/Founder:** Valeriy Zeltser
+- **HQ:** Calabasas, CA
+- **Employees:** ~75
+- **Revenue:** ~$5.6 million
+- **Recognition:** Named Top Featured Vendor in Financial Services Review (2022)
+
 **What it does:**
 - Connects consumers actively seeking financial products with advertiser-lenders
 - Generates tens of thousands of leads daily across credit cards, loans, mortgages
